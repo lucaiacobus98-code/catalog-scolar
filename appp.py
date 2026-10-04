@@ -1,3 +1,4 @@
+import hashlib
 import os
 import random
 import sqlite3
@@ -10,23 +11,30 @@ st.set_page_config(
     layout="centered",
 )
 
+# ----------------- SISTEM DE PAROLĂ CRIPTATĂ (SHA-256) -----------------
+# Acesta este hash-ul criptat pentru parola ta: Stelutezambitoare2022!
+# Textul clar nu apare nicăieri în cod!
+PAROLA_HASH_SECRET = "b417208d132b13f12467d5e2365e69e8b269b827e1f4229b47e22f28b4306361"
+
+def cripteaza(text):
+    return hashlib.sha256(text.encode()).hexdigest()
 
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 
 if not st.session_state.authenticated:
     st.title("🔒 Acces Restricționat - Catalog Școlar")
-    st.write("Te rog să introduci parola pentru a accesa catalogul.")
+    st.write("Te rog să introduci parola pentru a debloca aplicația.")
     
     parola_introdusa = st.text_input("Parolă:", type="password")
     if st.button("Autentificare"):
-        if parola_introdusa == PAROLA_SECRETA:
+        # Comparăm hash-ul textului tastat cu hash-ul secret
+        if cripteaza(parola_introdusa) == PAROLA_HASH_SECRET:
             st.session_state.authenticated = True
             st.rerun()
         else:
             st.error("❌ Parolă incorectă! Încearcă din nou.")
     
-    # Oprim execuția aplicației aici dacă utilizatorul nu este logat
     st.stop()
 
 # ----------------- Baza de date -----------------
