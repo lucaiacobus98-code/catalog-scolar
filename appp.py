@@ -11,8 +11,6 @@ st.set_page_config(
     layout="centered",
 )
 
-# ----------------- SISTEM DE PAROLĂ CRIPTATĂ (SHA-256) -----------------
-# Acesta este hash-ul criptat pentru parola ta: Stelutezambitoare2022!
 # Textul clar nu apare nicăieri în cod!
 PAROLA_HASH_SECRET = "b417208d132b13f12467d5e2365e69e8b269b827e1f4229b47e22f28b4306361"
 
