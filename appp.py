@@ -11,8 +11,9 @@ st.set_page_config(
     layout="centered",
 )
 
-# Textul clar nu apare nicăieri în cod!
-PAROLA_HASH_SECRET = "b417208d132b13f12467d5e2365e69e8b269b827e1f4229b47e22f28b4306361"
+# ----------------- SISTEM DE PAROLĂ CRIPTATĂ (SHA-256) -----------------
+# Aici pui hash-ul criptat obținut pentru parola ta
+PAROLA_HASH_SECRET = "acec72785caa9d12059f773773294e3bdd8259c511cb1a1dee91900366f0bbca"
 
 def cripteaza(text):
     return hashlib.sha256(text.encode()).hexdigest()
@@ -22,11 +23,10 @@ if "authenticated" not in st.session_state:
 
 if not st.session_state.authenticated:
     st.title("🔒 Acces Restricționat - Catalog Școlar")
-    st.write("Te rog să introduci parola pentru a debloca aplicația.")
+    st.write("Te rog să introduci parola criptată pentru a debloca aplicația.")
     
     parola_introdusa = st.text_input("Parolă:", type="password")
     if st.button("Autentificare"):
-        # Comparăm hash-ul textului tastat cu hash-ul secret
         if cripteaza(parola_introdusa) == PAROLA_HASH_SECRET:
             st.session_state.authenticated = True
             st.rerun()
