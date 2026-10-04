@@ -11,7 +11,7 @@ st.set_page_config(
     layout="centered",
 )
 
-# ----------------- SISTEM DE PAROLĂ CRIPTATĂ (SHA-256) -----------------
+# ----------------- SISTEM DE PAROLĂ CRIPTATĂ  -----------------
 # Aici pui hash-ul criptat obținut pentru parola ta
 PAROLA_HASH_SECRET = "acec72785caa9d12059f773773294e3bdd8259c511cb1a1dee91900366f0bbca"
 
