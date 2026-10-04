@@ -53,6 +53,11 @@ def init_db():
             poza TEXT
         )
     """)
+  try:
+    cursor.execute("ALTER TABLE elevi ADD COLUMN poza TEXT")
+  except:
+    pass
+
   cursor.execute("""
         CREATE TABLE IF NOT EXISTS note (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
