@@ -10,8 +10,6 @@ st.set_page_config(
     layout="centered",
 )
 
-# ----------------- SISTEM DE PAROLĂ (LOGIN) -----------------
-PAROLA_SECRETA = "catalog123"  # Poți schimba parola de aici cu ce vrei tu!
 
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
