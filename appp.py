@@ -11,8 +11,7 @@ st.set_page_config(
     layout="centered",
 )
 
-# ----------------- SISTEM DE PAROLĂ CRIPTATĂ  -----------------
-# Aici pui hash-ul criptat obținut pentru parola ta
+
 PAROLA_HASH_SECRET = "acec72785caa9d12059f773773294e3bdd8259c511cb1a1dee91900366f0bbca"
 
 def cripteaza(text):
@@ -23,7 +22,7 @@ if "authenticated" not in st.session_state:
 
 if not st.session_state.authenticated:
     st.title("🔒 Acces Restricționat - Catalog Școlar")
-    st.write("Te rog să introduci parola criptată pentru a debloca aplicația.")
+    st.write("Te rog să introduci parola pentru a debloca aplicația.")
     
     parola_introdusa = st.text_input("Parolă:", type="password")
     if st.button("Autentificare"):
@@ -80,20 +79,17 @@ def verifica_easter_egg():
 if "secret_active" not in st.session_state:
     st.session_state.secret_active = verifica_easter_egg()
 
-# ----------------- Stiluri CSS personalizate -----------------
+# ----------------- Stiluri CSS Corectate pentru Dark Mode -----------------
 if st.session_state.secret_active:
     bg_main = "#fef08a"
-    card_bg = "#f43f5e"
-    text_color = "#ffffff"
+    text_color = "#1e293b"
     title_text = "🦄 Catalog Școlar - PETRECERE 100! 🎊"
 elif "dark_mode" in st.session_state and st.session_state.dark_mode:
     bg_main = "#0f172a"
-    card_bg = "#1e293b"
     text_color = "#f8fafc"
     title_text = "🎓 Catalog Școlar Inteligent (Dark)"
 else:
     bg_main = "#f8fafc"
-    card_bg = "#ffffff"
     text_color = "#1e293b"
     title_text = "🎓 Catalog Școlar Inteligent"
 
@@ -102,7 +98,11 @@ st.markdown(f"""
     .stApp {{
         background-color: {bg_main};
     }}
-    h1, h2, h3, p, label {{
+    /* Forțăm vizibilitatea textului în orice element Streamlit, inclusiv Dark Mode */
+    h1, h2, h3, h4, h5, h6, p, span, label, div[data-testid="stMarkdownContainer"] {{
+        color: {text_color} !important;
+    }}
+    .streamlit-expanderHeader {{
         color: {text_color} !important;
     }}
     </style>
